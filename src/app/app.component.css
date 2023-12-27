@@ -1,0 +1,17 @@
+/* * { @apply border-2 border-sky-500 } */
+:host {
+  @apply flex justify-center items-center flex-col h-screen text-3xl mx-60 text-center text-white; 
+}
+@media (max-width: 700px) {
+  :host {
+    @apply mx-20;
+  }
+} 
+@media (max-width: 500px) {
+  :host {
+    @apply mx-10;
+  }
+} 
+button {
+  @apply bg-sky-500/50 p-3 rounded-md;
+}

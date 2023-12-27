@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'jokes';
+  joke: any;
+  constructor(private data: DataService) {}
+
+  ngOnInit(): void {
+    this.data
+      .getJokes()
+      .subscribe((result: any) => (this.joke = result['value']));
+  }
 }
