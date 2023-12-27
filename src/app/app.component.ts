@@ -11,6 +11,14 @@ export class AppComponent {
   constructor(private data: DataService) {}
 
   ngOnInit(): void {
+    this.loadJoke();
+  }
+
+  public handleClick(): void {
+    this.loadJoke();
+  }
+
+  private loadJoke(): void {
     this.data
       .getJokes()
       .subscribe((result: any) => (this.joke = result['value']));
