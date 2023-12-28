@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 body {
-  @apply bg-indigo-500;
+  /* @apply bg-orange-700; */
+  @apply  bg-slate-800;
 }

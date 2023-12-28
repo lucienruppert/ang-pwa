@@ -1,17 +1,12 @@
 /* * { @apply border-2 border-sky-500 } */
-:host {
-  @apply flex justify-center items-center flex-col h-screen text-3xl mx-60 text-center text-white; 
+.wrapper {
+  @apply flex justify-center items-center flex-col h-screen text-center text-white text-2xl mx-80 cursor-pointer; 
+}
+.joke {
+
 }
 @media (max-width: 700px) {
-  :host {
+  .wrapper {
     @apply mx-20;
   }
 } 
-@media (max-width: 500px) {
-  :host {
-    @apply mx-10;
-  }
-} 
-button {
-  @apply bg-sky-500/50 p-3 rounded-md;
-}

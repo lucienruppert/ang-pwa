@@ -1,2 +1,7 @@
-<button (click)="handleClick()">RELOAD</button>
-<div *ngIf="joke">{{ joke }}</div>
+<div
+  class="wrapper"
+  (click)="isMobile || handleClick()"
+  (touchstart)="isMobile && handleTouchStart()"
+>
+  <div class="joke" *ngIf="joke">{{ joke }}</div>
+</div>
