@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { DataService } from '../data.service';
+import { DataService, Joke } from '../data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,19 +7,19 @@ import { DataService } from '../data.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  public joke: any;
-  public pwaInstallStatus: Boolean | undefined = false;
-  public isMobile: boolean | undefined;
+  public joke: string | undefined;
+  public pwaInstallStatus: boolean | undefined = false;
+  public isNonDesktop: boolean | undefined;
   constructor(private data: DataService) {}
 
   ngOnInit(): void {
     this.loadJoke();
     this.setPWAInstallStatus();
-    this.setIsMobile();
+    this.setIsNonDesktop();
   }
 
-  private setIsMobile(): void {
-    this.isMobile =
+  private setIsNonDesktop(): void {
+    this.isNonDesktop =
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent
       );
@@ -35,8 +35,8 @@ export class AppComponent {
   private loadJoke(): void {
     try {
       this.data
-        .getJokes()
-        .subscribe((result: any) => (this.joke = result['value']));
+        .getJoke()
+        .subscribe((result: Joke) => (this.joke = result['value']));
     } catch (error) {
       console.log(error);
     }

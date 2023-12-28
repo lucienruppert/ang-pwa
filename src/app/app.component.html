@@ -1,7 +1,7 @@
 <div
   class="wrapper"
-  (click)="isMobile || handleClick()"
-  (touchstart)="isMobile && handleTouchStart()"
+  (click)="isNonDesktop || handleClick()"
+  (touchstart)="isNonDesktop && handleTouchStart()"
 >
   <div class="joke" *ngIf="joke">{{ joke }}</div>
 </div>
