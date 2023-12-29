@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataService, Joke } from '../data.service';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,33 @@ export class AppComponent {
   public joke: string | undefined;
   public pwaInstallStatus: boolean | undefined = false;
   public isNonDesktop: boolean | undefined;
-  constructor(private data: DataService) {}
+  constructor(private data: DataService, private swUpdate: SwUpdate) {
+    this.checkForNewVersion();
+    setInterval(() => this.checkForNewVersion(), 60 * 1000);
+  }
 
   ngOnInit(): void {
     this.loadJoke();
     this.setPWAInstallStatus();
     this.setIsNonDesktop();
   }
+
+  private checkForNewVersion = async () => {
+    try {
+      if (this.swUpdate.isEnabled) {
+        const isNewVersion = await this.swUpdate.checkForUpdate();
+        if (isNewVersion) {
+          const isNewVersionActivated = await this.swUpdate.activateUpdate();
+          if (isNewVersionActivated) {
+            window.location.reload();
+          }
+        }
+      }
+    } catch (error) {
+      console.log(`Error when checking for new version:`, error);
+      window.location.reload();
+    }
+  };
 
   private setIsNonDesktop(): void {
     this.isNonDesktop =
